@@ -65,6 +65,7 @@ __attribute__((weak)) RGB rgb_matrix_hsv_to_rgb(HSV hsv) {
 #endif
 // globals
 rgb_config_t rgb_matrix_config; // TODO: would like to prefix this with g_ for global consistancy, do this in another pr
+rgb_config_extra_t rgb_matrix_config_extra;
 uint32_t     g_rgb_timer;
 #ifdef RGB_MATRIX_FRAMEBUFFER_EFFECTS
 uint8_t g_rgb_frame_buffer[MATRIX_ROWS][MATRIX_COLS] = {{0}};
@@ -663,6 +664,40 @@ uint8_t rgb_matrix_get_sat(void) {
 uint8_t rgb_matrix_get_val(void) {
     return rgb_matrix_config.hsv.v;
 }
+
+
+// ========================== REACTIVE SETTINGS
+void rgb_matrix_reactive_sethsv_eeprom_helper(uint16_t hue, uint8_t sat, uint8_t val, bool write_to_eeprom) {
+    /*if (!rgb_matrix_config_extra.enable) {
+        return;
+    }*/
+    rgb_matrix_config_extra.hsvReactive.h = hue;
+    rgb_matrix_config_extra.hsvReactive.s = sat;
+    rgb_matrix_config_extra.hsvReactive.v = (val > RGB_MATRIX_MAXIMUM_BRIGHTNESS) ? RGB_MATRIX_MAXIMUM_BRIGHTNESS : val;
+    eeconfig_flag_rgb_matrix(write_to_eeprom);
+    dprintf("rgb matrix set hsv [%s]: %u,%u,%u\n", (write_to_eeprom) ? "EEPROM" : "NOEEPROM", rgb_matrix_config_extra.hsvReactive.h, rgb_matrix_config_extra.hsvReactive.s, rgb_matrix_config_extra.hsvReactive.v);
+}
+void rgb_matrix_reactive_sethsv_noeeprom(uint16_t hue, uint8_t sat, uint8_t val) {
+    rgb_matrix_reactive_sethsv_eeprom_helper(hue, sat, val, false);
+}
+void rgb_matrix_reactive_sethsv(uint16_t hue, uint8_t sat, uint8_t val) {
+    rgb_matrix_sethsv_eeprom_helper(hue, sat, val, true);
+}
+
+HSV rgb_matrix_reactive_get_hsv(void) {
+    return rgb_matrix_config_extra.hsvReactive;
+}
+uint8_t rgb_matrix_reactive_get_hue(void) {
+    return rgb_matrix_config_extra.hsvReactive.h;
+}
+uint8_t rgb_matrix_reactive_get_sat(void) {
+    return rgb_matrix_config_extra.hsvReactive.s;
+}
+uint8_t rgb_matrix_reactive_get_val(void) {
+    return rgb_matrix_config_extra.hsvReactive.v;
+}
+// ==========================
+
 
 void rgb_matrix_increase_hue_helper(bool write_to_eeprom) {
     rgb_matrix_sethsv_eeprom_helper(rgb_matrix_config.hsv.h + RGB_MATRIX_HUE_STEP, rgb_matrix_config.hsv.s, rgb_matrix_config.hsv.v, write_to_eeprom);

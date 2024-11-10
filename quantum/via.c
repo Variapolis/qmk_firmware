@@ -682,6 +682,15 @@ void via_qmk_rgb_matrix_get_value(uint8_t *data) {
             value_data[1] = rgb_matrix_get_sat();
             break;
         }
+        case id_qmk_rgb_matrix_reactive_brightness: {
+            value_data[0] = ((uint16_t)rgb_matrix_reactive_get_val() * UINT8_MAX) / RGB_MATRIX_MAXIMUM_BRIGHTNESS;
+            break;
+        }
+        case id_qmk_rgb_matrix_reactive_color: {
+            value_data[0] = rgb_matrix_reactive_get_hue();
+            value_data[1] = rgb_matrix_reactive_get_sat();
+            break;
+        }
     }
 }
 
@@ -709,6 +718,14 @@ void via_qmk_rgb_matrix_set_value(uint8_t *data) {
         }
         case id_qmk_rgb_matrix_color: {
             rgb_matrix_sethsv_noeeprom(value_data[0], value_data[1], rgb_matrix_get_val());
+            break;
+        }
+        case id_qmk_rgb_matrix_reactive_brightness: {
+            rgb_matrix_reactive_sethsv_noeeprom(rgb_matrix_reactive_get_hue(), rgb_matrix_reactive_get_sat(), scale8(value_data[0], RGB_MATRIX_MAXIMUM_BRIGHTNESS));
+            break;
+        }
+        case id_qmk_rgb_matrix_reactive_color: {
+            rgb_matrix_reactive_sethsv_noeeprom(value_data[0], value_data[1], rgb_matrix_reactive_get_val());
             break;
         }
     }

@@ -30,6 +30,9 @@
 #    define SNLED23751_SPI_DIVISOR 16
 #    define SPI_DRIVER SPID1
 
+/* Enable Solid Reactive */
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE
+
 /* Set LED driver current */
 #    define SNLED27351_CURRENT_TUNE \
         { 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28 }

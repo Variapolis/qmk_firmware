@@ -84,4 +84,8 @@ typedef union {
     };
 } rgb_config_t;
 
+typedef struct PACKED {
+ HSV         hsvReactive;
+} rgb_config_extra_t;
+
 _Static_assert(sizeof(rgb_config_t) == sizeof(uint64_t), "RGB Matrix EECONFIG out of spec.");

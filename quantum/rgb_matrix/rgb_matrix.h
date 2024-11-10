@@ -212,6 +212,14 @@ HSV         rgb_matrix_get_hsv(void);
 uint8_t     rgb_matrix_get_hue(void);
 uint8_t     rgb_matrix_get_sat(void);
 uint8_t     rgb_matrix_get_val(void);
+// REACTIVE
+void        rgb_matrix_reactive_sethsv(uint16_t hue, uint8_t sat, uint8_t val);
+void        rgb_matrix_reactive_sethsv_noeeprom(uint16_t hue, uint8_t sat, uint8_t val);
+HSV         rgb_matrix_reactive_get_hsv(void);
+uint8_t     rgb_matrix_reactive_get_hue(void);
+uint8_t     rgb_matrix_reactive_get_sat(void);
+uint8_t     rgb_matrix_reactive_get_val(void);
+//
 void        rgb_matrix_increase_hue(void);
 void        rgb_matrix_increase_hue_noeeprom(void);
 void        rgb_matrix_decrease_hue(void);
@@ -324,6 +332,7 @@ static inline bool rgb_matrix_check_finished_leds(uint8_t led_idx) {
 extern const rgb_matrix_driver_t rgb_matrix_driver;
 
 extern rgb_config_t rgb_matrix_config;
+extern rgb_config_extra_t rgb_matrix_config_extra;
 
 extern uint32_t     g_rgb_timer;
 extern led_config_t g_led_config;

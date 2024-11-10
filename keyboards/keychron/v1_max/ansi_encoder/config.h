@@ -33,6 +33,9 @@
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in snled27351.h) */
 #    define PHASE_CHANNEL MSKPHASE_9CHANNEL
 
+/* Enable Solid Reactive */
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE
+
 /* Set LED driver current */
 #    define SNLED27351_CURRENT_TUNE \
         { 0x2C, 0x2C, 0x2C, 0x2C, 0x2C, 0x2C, 0x2C, 0x2C, 0x2C, 0x2C, 0x2C, 0x2C }
