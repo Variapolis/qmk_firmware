@@ -549,6 +549,7 @@ static bool rgb_matrix_handlers_master(matrix_row_t master_matrix[], matrix_row_
     static uint32_t   last_update = 0;
     rgb_matrix_sync_t rgb_matrix_sync;
     memcpy(&rgb_matrix_sync.rgb_matrix, &rgb_matrix_config, sizeof(rgb_config_t));
+    memcpy(&rgb_matrix_sync.rgb_matrix_extra, &rgb_matrix_config_extra, sizeof(rgb_config_extra_t));
     rgb_matrix_sync.rgb_suspend_state = rgb_matrix_get_suspend_state();
     return send_if_data_mismatch(PUT_RGB_MATRIX, &last_update, &rgb_matrix_sync, &split_shmem->rgb_matrix_sync, sizeof(rgb_matrix_sync));
 }
@@ -556,6 +557,7 @@ static bool rgb_matrix_handlers_master(matrix_row_t master_matrix[], matrix_row_
 static void rgb_matrix_handlers_slave(matrix_row_t master_matrix[], matrix_row_t slave_matrix[]) {
     split_shared_memory_lock();
     memcpy(&rgb_matrix_config, &split_shmem->rgb_matrix_sync.rgb_matrix, sizeof(rgb_config_t));
+    memcpy(&rgb_matrix_config_extra, &split_shmem->rgb_matrix_sync.rgb_matrix_extra, sizeof(rgb_config_extra_t));
     bool rgb_suspend_state = split_shmem->rgb_matrix_sync.rgb_suspend_state;
     split_shared_memory_unlock();
 

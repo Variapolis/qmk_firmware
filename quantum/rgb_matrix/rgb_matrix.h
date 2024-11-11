@@ -273,6 +273,14 @@ bool rgb_matrix_driver_allow_shutdown(void);
 #    define rgblight_get_sat rgb_matrix_get_sat
 #    define rgblight_get_val rgb_matrix_get_val
 #    define rgblight_get_hsv rgb_matrix_get_hsv
+// REACTIVE
+#   define  rgblight_reactive_sethsv rgb_matrix_reactive_sethsv
+#   define  rgblight_reactive_mode_noeeprom rgb_matrix_reactive_sethsv_noeeprom
+#   define  rgblight_reactive_get_hsv rgb_matrix_reactive_get_hsv
+#   define  rgblight_reactive_get_hue rgb_matrix_reactive_get_hue
+#   define  rgblight_reactive_get_sat rgb_matrix_reactive_get_sat
+#   define rgblight_reactive_get_val rgb_matrix_reactive_get_val
+//
 #    define rgblight_step rgb_matrix_step
 #    define rgblight_step_noeeprom rgb_matrix_step_noeeprom
 #    define rgblight_step_reverse rgb_matrix_step_reverse
