@@ -27,7 +27,9 @@
         "xstring": "c",
         "xutility": "c",
         "atomic": "c",
-        "ostream": "c"
+        "ostream": "c",
+        "regex": "c",
+        "xiosbase": "c"
     },
     "[markdown]": {
         "editor.trimAutoWhitespace": false,

@@ -91,6 +91,7 @@ typedef struct _led_matrix_sync_t {
 
 typedef struct _rgb_matrix_sync_t {
     rgb_config_t rgb_matrix;
+    rgb_config_extra_t rgb_matrix_extra;
     bool         rgb_suspend_state;
 } rgb_matrix_sync_t;
 #endif // defined(RGB_MATRIX_ENABLE) && defined(RGB_MATRIX_SPLIT)
